@@ -24,7 +24,6 @@ class App extends Component {
 
   componentWillMount(){
     const previousOpportunities = this.state.opportunities;
-    console.log('componentWillMount opportunities', previousOpportunities);
 
     // Data Snapshot
     this.database.on('child_added', snap => {
@@ -36,8 +35,6 @@ class App extends Component {
         opportunityDescription: snap.val().opportunityDescription,
         opportunityLink: snap.val().opportunityLink,
       })
-
-      console.log('after', previousOpportunities);
 
       this.setState({
         opportunities: previousOpportunities
@@ -57,12 +54,11 @@ class App extends Component {
   })
 }
 
-  addOpportunity(newOpportunityTitle, newopportunityCompany, newopportunityLocation, newopportunityDescription, newopportunityLink){
-    this.database.push({opportunityTitle: newOpportunityTitle,
-                              opportunityCompany: newopportunityCompany,
-                              opportunityLocation: newopportunityLocation,
-                              opportunityDescription: newopportunityDescription,
-                              opportunityLink: newopportunityLink});
+  addOpportunity(opportunity){
+    // console.table(opportunity)
+    /* Husk at vi bare sendte state-objektet fra Form, så det er jo bare å pushe den 
+       rett til databasen! :) */
+    this.database.push(opportunity);
   }
 
   removeOpportunity(opportunityId){
@@ -70,7 +66,8 @@ class App extends Component {
   }
 
   render() {
-    console.log('opportunities', this.state.opportunities)
+    // console.log('opportunities', this.state.opportunities)
+
     return (
     <div className="opportunityWrapper">
       <div className="OpportunityBody">
@@ -79,12 +76,17 @@ class App extends Component {
       </div>
       <div className="OpportunityBody">
         <div className="OpportunityHeader"> All Opportunities </div>
-        console.log(this.opportunityTitle)
         {
-          this.state.opportunities.map((opportunity) => {
-            console.log(opportunity)
+          this.state.opportunities.map((FIX_BUG, i) => {
+            
+            /* Her er det noe i databasen som gjør at vi får dobbelt.
+              For nå, så henter vi bare det innerste objektet (opportunityTitle), siden det er 
+              den som blir registrert riktig */
+            const opportunity = FIX_BUG.opportunityTitle;
+
             return (
-              <Opportunity
+                <Opportunity
+                key={i} /* Når man bruker map og genererer elementer må man ha en key for hvert element */
                 opportunityTitle={opportunity.opportunityTitle}
                 opportunityCompany={opportunity.opportunityCompany}
                 opportunityLocation={opportunity.opportunityLocation}
