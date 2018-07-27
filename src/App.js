@@ -27,13 +27,24 @@ class App extends Component {
 
     // Data Snapshot
     this.database.on('child_added', snap => {
+      const opportunity = snap.val()
+
+      /*Bug: det som var problemet var at snap.val() returnerer hele 
+      objektet som ble lagret, så opportunityTitle ble hele objektet, 
+      og deretter lagret du resten dobbelt :) */ 
+      // previousOpportunities.push({
+      //   id: snap.key,
+      //   opportunityTitle: snap.val(),
+      //   opportunityCompany: snap.val().opportunityCompany,
+      //   opportunityLocation: snap.val().opportunityLocation,
+      //   opportunityDescription: snap.val().opportunityDescription,
+      //   opportunityLink: snap.val().opportunityLink,
+      // })
+
+      /* Du kan derfor gjøre slik */
       previousOpportunities.push({
-        id: snap.key,
-        opportunityTitle: snap.val(),
-        opportunityCompany: snap.val().opportunityCompany,
-        opportunityLocation: snap.val().opportunityLocation,
-        opportunityDescription: snap.val().opportunityDescription,
-        opportunityLink: snap.val().opportunityLink,
+        ...snap.val(),
+        id: snap.key
       })
 
       this.setState({
@@ -62,6 +73,7 @@ class App extends Component {
   }
 
   removeOpportunity(opportunityId){
+    console.log('removing opportunity', opportunityId)
     this.database.child(opportunityId).remove();
   }
 
@@ -77,12 +89,12 @@ class App extends Component {
       <div className="OpportunityBody">
         <div className="OpportunityHeader"> All Opportunities </div>
         {
-          this.state.opportunities.map((FIX_BUG, i) => {
+          this.state.opportunities.map((opportunity, i) => {
             
             /* Her er det noe i databasen som gjør at vi får dobbelt.
               For nå, så henter vi bare det innerste objektet (opportunityTitle), siden det er 
-              den som blir registrert riktig */
-            const opportunity = FIX_BUG.opportunityTitle;
+              den som blir registrert riktig 
+              EDIT: Se kommentar i componentWillMount() */
 
             return (
                 <Opportunity
