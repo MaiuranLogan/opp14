@@ -122,8 +122,8 @@ class App extends Component {
           onClick={this.handleUserInput}> Select Type </button>
 
         {this.state.type === 'job' && <Form type={this.state.type} addOpportunity={this.addOpportunity} />}
-        {this.state.type === 'event' && <Form type={this.state.type} />}
-        {this.state.type === 'program' && <Form type={this.state.type} />}
+        {this.state.type === 'event' && <Form type={this.state.type} addOpportunity={this.addOpportunity}  />}
+        {this.state.type === 'program' && <Form type={this.state.type} addOpportunity={this.addOpportunity} />}
 
       </div>
       <div className="OpportunityBody">
