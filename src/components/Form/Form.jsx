@@ -7,25 +7,25 @@ const JobForm = (props) => {
     <input className="titleInput"
       placeholder="Title..."
       name="Title"         /* Lagt til */
-      onChange={this.handleUserInput}/>
+      onChange={props.handleUserInput}/>
     <input className="companyInput"
         placeholder="Company..."
         name="Company"      /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="locationInput"
         placeholder="Location..."
         name="Location"    /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="descriptionInput"
         placeholder="Description..."
         name="Description"   /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="linkInput"
         placeholder="Link..."
         name="Link"          /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <button className="noteButton"
-        onClick={this.writeOpportunity}> Add Opportunity</button>
+        onClick={props.writeOpportunity}> Add Opportunity</button>
   </div>
   )
 }
@@ -36,25 +36,25 @@ const EventForm = (props) => {
     <input className="titleInput"
       placeholder="Title..."
       name="Title"         /* Lagt til */
-      onChange={this.handleUserInput}/>
+      onChange={props.handleUserInput}/>
     <input className="companyInput"
         placeholder="Event..."
         name="Company"      /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="locationInput"
         placeholder="Location..."
         name="Location"    /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="descriptionInput"
         placeholder="Description..."
         name="Description"   /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="linkInput"
         placeholder="Link..."
         name="Link"          /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <button className="noteButton"
-    onClick={this.writeOpportunity}> Add Opportunity</button>
+    onClick={props.writeOpportunity}> Add Opportunity</button>
   </div>
   )
 }
@@ -83,7 +83,7 @@ const ProgramForm = (props) => {
         name="Link"          /* Lagt til */
         onChange={this.handleUserInput}/>
     <button className="noteButton"
-    onClick={this.writeOpportunity}> Add Opportunity</button>
+    onClick={props.writeOpportunity}> Add Opportunity</button>
   </div>
   )
 }
@@ -101,6 +101,7 @@ class Form extends Component{
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.writeOpportunity = this.writeOpportunity.bind(this);
+
     // this.handleUserType = this.handleUserType.bind(this);
   }
 
@@ -133,12 +134,6 @@ class Form extends Component{
     this.setState(newState)
   }
 
-  // handleUserType(e){
-  //   this.setState({
-  //     type: e.target.value
-  //   });
-  // }
-
 
 
   writeOpportunity(){
@@ -151,7 +146,7 @@ class Form extends Component{
     const {Type, Title, Company,
     Location, Description, Link} = this.state;
 
-    this.props.addOpportunity(this.state);
+    this.addOpportunity(this.state);
 
 
 
@@ -167,7 +162,7 @@ class Form extends Component{
 
     return(
       <div>
-        {this.props.type === 'job' && <JobForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity}/>}
+        {this.props.type === 'job' && <JobForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity} addOpportunity={this.addOpportunity}/>}
         {this.props.type === 'event' && <EventForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity} />}
         {this.props.type === 'program' && <ProgramForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity} />}
       </div>
