@@ -5,7 +5,7 @@ class Form extends Component{
   constructor(props){
     super(props);
     this.state = {
-      Type: '',
+      type: '',
       Title: '',
       Company: '',
       Location: '',
@@ -14,11 +14,16 @@ class Form extends Component{
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.writeOpportunity = this.writeOpportunity.bind(this);
+    this.momdad = this.momdad.bind(this);
 
     // this.handleUserType = this.handleUserType.bind(this);
   }
 
 //Sets the newopportunityTitle to the e.target.value
+momdad() {
+  alert("ok");
+}
+
   handleUserInput(e){
     /* Her kan du bare bruke e.target.value for å hente verdi */
     /* Du kan også bruke e.target.name for å identifisere hvilken input det er.
@@ -38,6 +43,8 @@ class Form extends Component{
     }
     newState[name] = value
 
+    console.log(newState, 'this is newstate')
+
     this.setState(newState)
   }
 
@@ -47,13 +54,15 @@ class Form extends Component{
   //   });
   // }
 
+
+
   writeOpportunity(){
-    //call a method that sets the content to the handleUserInput
 
     /* Dette er en annen måte å hente ut verdier fra objekter på
       Her hentes de 5 feltene altså fra objektet this.state
       Veldig vanlig om du ønsker å trekke ut verdier i starten for å bruke dem
       senere */
+    console.log('dette er this state')
     const {Type, Title, Company,
     Location, Description, Link} = this.state;
 
