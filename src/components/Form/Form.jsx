@@ -1,6 +1,93 @@
 import React, { Component } from 'react';
 import './Form.css';
 
+const JobForm = (props) => {
+  return(
+    <div>
+    <input className="titleInput"
+      placeholder="Title..."
+      name="Title"         /* Lagt til */
+      onChange={this.handleUserInput}/>
+    <input className="companyInput"
+        placeholder="Company..."
+        name="Company"      /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="locationInput"
+        placeholder="Location..."
+        name="Location"    /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="descriptionInput"
+        placeholder="Description..."
+        name="Description"   /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="linkInput"
+        placeholder="Link..."
+        name="Link"          /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <button className="noteButton"
+        onClick={this.writeOpportunity}> Add Opportunity</button>
+  </div>
+  )
+}
+
+const EventForm = (props) => {
+  return(
+    <div>
+    <input className="titleInput"
+      placeholder="Title..."
+      name="Title"         /* Lagt til */
+      onChange={this.handleUserInput}/>
+    <input className="companyInput"
+        placeholder="Event..."
+        name="Company"      /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="locationInput"
+        placeholder="Location..."
+        name="Location"    /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="descriptionInput"
+        placeholder="Description..."
+        name="Description"   /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="linkInput"
+        placeholder="Link..."
+        name="Link"          /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <button className="noteButton"
+    onClick={this.writeOpportunity}> Add Opportunity</button>
+  </div>
+  )
+}
+
+const ProgramForm = (props) => {
+  return(
+    <div>
+    <input className="titleInput"
+      placeholder="Title..."
+      name="Title"         /* Lagt til */
+      onChange={this.handleUserInput}/>
+    <input className="companyInput"
+        placeholder="Program..."
+        name="Company"      /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="locationInput"
+        placeholder="Location..."
+        name="Location"    /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="descriptionInput"
+        placeholder="Description..."
+        name="Description"   /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="linkInput"
+        placeholder="Link..."
+        name="Link"          /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <button className="noteButton"
+    onClick={this.writeOpportunity}> Add Opportunity</button>
+  </div>
+  )
+}
+
 class Form extends Component{
   constructor(props){
     super(props);
@@ -14,15 +101,13 @@ class Form extends Component{
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.writeOpportunity = this.writeOpportunity.bind(this);
-    this.momdad = this.momdad.bind(this);
-
     // this.handleUserType = this.handleUserType.bind(this);
   }
 
+
+
+
 //Sets the newopportunityTitle to the e.target.value
-momdad() {
-  alert("ok");
-}
 
   handleUserInput(e){
     /* Her kan du bare bruke e.target.value for å hente verdi */
@@ -77,42 +162,14 @@ momdad() {
 
   render(){
     console.log(this.state)
+
+    const { type } = this.props;
+
     return(
       <div>
-        {/* <label>
-          Pick your opportunity type:
-          <select value={this.state.type} onChange={this.handleUserInput}>
-            <option name="job">Job</option>
-            <option name="event">Event</option>
-            <option name="program">Program</option>
-          </select>
-        </label> */}
-        <input className="titleInput"
-          placeholder="Type..."
-          name="Type"         /* Lagt til */
-          onChange={this.handleUserInput}/>
-        <input className="titleInput"
-          placeholder="Title..."
-          name="Title"         /* Lagt til */
-          onChange={this.handleUserInput}/>
-        <input className="companyInput"
-            placeholder="Company..."
-            name="Company"      /* Lagt til */
-            onChange={this.handleUserInput}/>
-        <input className="locationInput"
-            placeholder="Location..."
-            name="Location"    /* Lagt til */
-            onChange={this.handleUserInput}/>
-        <input className="descriptionInput"
-            placeholder="Description..."
-            name="Description"   /* Lagt til */
-            onChange={this.handleUserInput}/>
-        <input className="linkInput"
-            placeholder="Link..."
-            name="Link"          /* Lagt til */
-            onChange={this.handleUserInput}/>
-        <button className="noteButton"
-        onClick={this.writeOpportunity}> Add Opportunity</button>
+        {this.props.type === 'job' && <JobForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity}/>}
+        {this.props.type === 'event' && <EventForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity} />}
+        {this.props.type === 'program' && <ProgramForm handleUserInput={this.handleUserInput} writeOpportunity={this.writeOpportunity} />}
       </div>
     )
   }
