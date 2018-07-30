@@ -27,12 +27,37 @@ class Opportunity extends Component{
           onClick={() => this.handleRemoveOpportunity(this.opportunityId)}>
           &times;
         </span>
-        <p className="opportunityContent"> { this.Type } </p>
-        <p className="opportunityContent"> { this.Title } </p>
-        <p className="opportunityContent"> { this.Company } </p>
-        <p className="opportunityContent"> { this.Location } </p>
-        <p className="opportunityContent"> { this.Description } </p>
-        <p className="opportunityContent"> { this.Link } </p>
+
+        {this.props.Type === 'job' && <div>
+        <p className="jobContent"> { this.props.Title } </p>
+        <p className="jobContent"> { this.props.Company } </p>
+        <p className="jobContent"> { this.props.Location } </p>
+        <p className="jobContent"> { this.props.Description } </p>
+        <p className="jobContent"> { this.props.Link } </p>
+        <p className="jobContent"> { this.props.Type } </p>
+        </div>
+        }
+
+        {this.props.Type === 'event' && <div>
+        <p className="eventContent"> { this.props.Title } </p>
+        <p className="eventContent"> { this.props.Company } </p>
+        <p className="eventContent"> { this.props.Location } </p>
+        <p className="eventContent"> { this.props.Description } </p>
+        <p className="eventContent"> { this.props.Link } </p>
+        <p className="eventContent"> { this.props.Type } </p>
+        </div>
+        }
+
+        {this.props.Type === 'program' && <div>
+        <p className="programContent"> { this.props.Title } </p>
+        <p className="programContent">  { this.props.Company } </p>
+        <p className="programContent">  { this.props.Location } </p>
+        <p className="programContent">  { this.props.Description } </p>
+        <p className="programContent">  { this.props.Link } </p>
+        <p className="programContent">  { this.props.Type } </p>
+        </div>
+        }
+
       </div>
     )
   }
