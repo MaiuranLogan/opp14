@@ -6,92 +6,6 @@ import firebase from 'firebase';
 import 'firebase/database';
 import './App.css';
 
-const JobForm = (props) => {
-  return(
-    <div>
-    <input className="titleInput"
-      placeholder="Title..."
-      name="Title"         /* Lagt til */
-      onChange={props.handleUserInput}/>
-    <input className="companyInput"
-        placeholder="Company..."
-        name="Company"      /* Lagt til */
-        onChange={props.handleUserInput}/>
-    <input className="locationInput"
-        placeholder="Location..."
-        name="Location"    /* Lagt til */
-        onChange={props.handleUserInput}/>
-    <input className="descriptionInput"
-        placeholder="Description..."
-        name="Description"   /* Lagt til */
-        onChange={props.handleUserInput}/>
-    <input className="linkInput"
-        placeholder="Link..."
-        name="Link"          /* Lagt til */
-        onChange={props.handleUserInput}/>
-    <button className="noteButton"
-        onClick={props.momdad}> Add Opportunity</button>
-  </div>
-  )
-}
-
-const EventForm = (props) => {
-  return(
-    <div>
-    <input className="titleInput"
-      placeholder="Title..."
-      name="Title"         /* Lagt til */
-      onChange={this.handleUserInput}/>
-    <input className="companyInput"
-        placeholder="Event..."
-        name="Company"      /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <input className="locationInput"
-        placeholder="Location..."
-        name="Location"    /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <input className="descriptionInput"
-        placeholder="Description..."
-        name="Description"   /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <input className="linkInput"
-        placeholder="Link..."
-        name="Link"          /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <button className="noteButton"
-    onClick={this.writeOpportunity}> Add Opportunity</button>
-  </div>
-  )
-}
-
-const ProgramForm = (props) => {
-  return(
-    <div>
-    <input className="titleInput"
-      placeholder="Title..."
-      name="Title"         /* Lagt til */
-      onChange={this.handleUserInput}/>
-    <input className="companyInput"
-        placeholder="Program..."
-        name="Company"      /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <input className="locationInput"
-        placeholder="Location..."
-        name="Location"    /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <input className="descriptionInput"
-        placeholder="Description..."
-        name="Description"   /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <input className="linkInput"
-        placeholder="Link..."
-        name="Link"          /* Lagt til */
-        onChange={this.handleUserInput}/>
-    <button className="noteButton"
-    onClick={this.writeOpportunity}> Add Opportunity</button>
-  </div>
-  )
-}
 
 class App extends Component {
   constructor(props){
@@ -199,7 +113,6 @@ class App extends Component {
     <div className="opportunityWrapper">
       <div className="OpportunityBody">
         <div className="OpportunityHeader"> Input Opportunity </div>
-
         <input className="titleInput"
           placeholder="Type..."
           name="type"
@@ -208,9 +121,9 @@ class App extends Component {
         <button className="noteButton"
           onClick={this.handleUserInput}> Select Type </button>
 
-        {this.state.type === 'job' && <JobForm momdad = {this.momdad} handleUserInput = {this.handleUserInput}/>}
-        {this.state.type === 'event' && <EventForm addOpportunity = {this.addOpportunity} />}
-        {this.state.type === 'program' && <ProgramForm addOpportunity = {this.addOpportunity} />}
+        {this.state.type === 'job' && <Form type={this.state.type} addOpportunity={this.addOpportunity} />}
+        {this.state.type === 'event' && <Form type={this.state.type} />}
+        {this.state.type === 'program' && <Form type={this.state.type} />}
 
       </div>
       <div className="OpportunityBody">
