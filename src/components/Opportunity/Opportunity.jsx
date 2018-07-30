@@ -6,12 +6,13 @@ class Opportunity extends Component{
 
   constructor(props){
     super(props);
-    this.opportunityTitle = props.opportunityTitle;
+    this.Type = props.Type;
+    this.Title = props.Title;
     this.opportunityId = props.opportunityId;
-    this.opportunityCompany = props.opportunityCompany;
-    this.opportunityLocation = props.opportunityLocation;
-    this.opportunityDescription = props.opportunityDescription;
-    this.opportunityLink = props.opportunityLink;
+    this.Company = props.Company;
+    this.Location = props.Location;
+    this.Description = props.Description;
+    this.Link = props.Link;
     this.handleRemoveOpportunity = this.handleRemoveOpportunity.bind(this);
   }
 
@@ -26,17 +27,19 @@ class Opportunity extends Component{
           onClick={() => this.handleRemoveOpportunity(this.opportunityId)}>
           &times;
         </span>
-        <p className="opportunityContent"> { this.opportunityTitle } </p>
-        <p className="opportunityContent"> { this.opportunityCompany } </p>
-        <p className="opportunityContent"> { this.opportunityLocation } </p>
-        <p className="opportunityContent"> { this.opportunityDescription } </p>
-        <p className="opportunityContent"> { this.opportunityLink } </p>
+        <p className="opportunityContent"> { this.Type } </p>
+        <p className="opportunityContent"> { this.Title } </p>
+        <p className="opportunityContent"> { this.Company } </p>
+        <p className="opportunityContent"> { this.Location } </p>
+        <p className="opportunityContent"> { this.Description } </p>
+        <p className="opportunityContent"> { this.Link } </p>
       </div>
     )
   }
 }
 
 Opportunity.propTypes = {
+  opportunityType: PropTypes.string,
   opportunityTitle: PropTypes.string,
   opportunityCompany: PropTypes.string,
   opportunityLocation: PropTypes.string,

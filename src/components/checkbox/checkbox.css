@@ -1,0 +1,16 @@
+ .checkbox{
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  position: relative;
+  display: inline-block;
+  min-height: 40px;
+  width: 25%;
+  background: #ebebeb;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
