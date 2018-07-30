@@ -24,6 +24,10 @@ const JobForm = (props) => {
         placeholder="Link..."
         name="Link"          /* Lagt til */
         onChange={props.handleUserInput}/>
+    <input className="titleInput"
+        placeholder="OppType..."
+        name="Type"         /* Lagt til */
+        onChange={props.handleUserInput}/>
     <button className="noteButton"
         onClick={props.writeOpportunity}> Add Opportunity</button>
   </div>
@@ -53,6 +57,10 @@ const EventForm = (props) => {
         placeholder="Link..."
         name="Link"          /* Lagt til */
         onChange={props.handleUserInput}/>
+    <input className="titleInput"
+        placeholder="OppType..."
+        name="Type"         /* Lagt til */
+        onChange={props.handleUserInput}/>
     <button className="noteButton"
     onClick={props.writeOpportunity}> Add Opportunity</button>
   </div>
@@ -65,23 +73,27 @@ const ProgramForm = (props) => {
     <input className="titleInput"
       placeholder="Title..."
       name="Title"         /* Lagt til */
-      onChange={this.handleUserInput}/>
+      onChange={props.handleUserInput}/>
     <input className="companyInput"
         placeholder="Program..."
         name="Company"      /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="locationInput"
         placeholder="Location..."
         name="Location"    /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="descriptionInput"
         placeholder="Description..."
         name="Description"   /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
     <input className="linkInput"
         placeholder="Link..."
         name="Link"          /* Lagt til */
-        onChange={this.handleUserInput}/>
+        onChange={props.handleUserInput}/>
+    <input className="titleInput"
+        placeholder="OppType..."
+        name="Type"         /* Lagt til */
+        onChange={props.handleUserInput}/>
     <button className="noteButton"
     onClick={props.writeOpportunity}> Add Opportunity</button>
   </div>
@@ -92,7 +104,7 @@ class Form extends Component{
   constructor(props){
     super(props);
     this.state = {
-      type: '',
+      Type: '',
       Title: '',
       Company: '',
       Location: '',
@@ -142,11 +154,11 @@ class Form extends Component{
       Her hentes de 5 feltene altså fra objektet this.state
       Veldig vanlig om du ønsker å trekke ut verdier i starten for å bruke dem
       senere */
-    console.log('dette er this state')
+
     const {Type, Title, Company,
     Location, Description, Link} = this.state;
 
-    this.addOpportunity(this.state);
+    this.props.addOpportunity(this.state);
 
 
 
