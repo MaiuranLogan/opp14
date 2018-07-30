@@ -6,6 +6,92 @@ import firebase from 'firebase';
 import 'firebase/database';
 import './App.css';
 
+const JobForm = (props) => {
+  return(
+    <div>
+    <input className="titleInput"
+      placeholder="Title..."
+      name="Title"         /* Lagt til */
+      onChange={props.handleUserInput}/>
+    <input className="companyInput"
+        placeholder="Company..."
+        name="Company"      /* Lagt til */
+        onChange={props.handleUserInput}/>
+    <input className="locationInput"
+        placeholder="Location..."
+        name="Location"    /* Lagt til */
+        onChange={props.handleUserInput}/>
+    <input className="descriptionInput"
+        placeholder="Description..."
+        name="Description"   /* Lagt til */
+        onChange={props.handleUserInput}/>
+    <input className="linkInput"
+        placeholder="Link..."
+        name="Link"          /* Lagt til */
+        onChange={props.handleUserInput}/>
+    <button className="noteButton"
+        onClick={props.momdad}> Add Opportunity</button>
+  </div>
+  )
+}
+
+const EventForm = (props) => {
+  return(
+    <div>
+    <input className="titleInput"
+      placeholder="Title..."
+      name="Title"         /* Lagt til */
+      onChange={this.handleUserInput}/>
+    <input className="companyInput"
+        placeholder="Event..."
+        name="Company"      /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="locationInput"
+        placeholder="Location..."
+        name="Location"    /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="descriptionInput"
+        placeholder="Description..."
+        name="Description"   /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="linkInput"
+        placeholder="Link..."
+        name="Link"          /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <button className="noteButton"
+    onClick={this.writeOpportunity}> Add Opportunity</button>
+  </div>
+  )
+}
+
+const ProgramForm = (props) => {
+  return(
+    <div>
+    <input className="titleInput"
+      placeholder="Title..."
+      name="Title"         /* Lagt til */
+      onChange={this.handleUserInput}/>
+    <input className="companyInput"
+        placeholder="Program..."
+        name="Company"      /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="locationInput"
+        placeholder="Location..."
+        name="Location"    /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="descriptionInput"
+        placeholder="Description..."
+        name="Description"   /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <input className="linkInput"
+        placeholder="Link..."
+        name="Link"          /* Lagt til */
+        onChange={this.handleUserInput}/>
+    <button className="noteButton"
+    onClick={this.writeOpportunity}> Add Opportunity</button>
+  </div>
+  )
+}
 
 class App extends Component {
   constructor(props){
@@ -13,6 +99,7 @@ class App extends Component {
 
     this.addOpportunity = this.addOpportunity.bind(this);
     this.removeOpportunity = this.removeOpportunity.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
 
     this.app = firebase.initializeApp(DB_CONFIG);
     this.database = this.app.database().ref().child('opportunities');
@@ -20,6 +107,7 @@ class App extends Component {
     //We are going to setup the React state of our component
     this.state = {
       opportunities: [],
+      type: '',
     }
 
   }
@@ -67,36 +155,6 @@ class App extends Component {
     })
   })
 }
-  //
-  // toggleCheckbox = label => {
-  //   if(this.selectedCheckbox.has(label)){
-  //     this.selectedCheckbox.delete(label)
-  //   } else {
-  //     this.selectedCheckbox.add(label)
-  //   }
-  // }
-  //
-  // handleTypeSubmit = typeSubmitEvent => {
-  //   typeSubmitEvent.preventDefault();
-  //
-  //   for(const checkbox of this.selectedCheckbox){
-  //     this.setState({
-  //       selectedType: checkbox
-  //     })
-  //   }
-  // }
-  //
-  // createCheckbox = label => (
-  //   <Checkbox
-  //           label={label}
-  //           handleCheckboxChange={this.toggleCheckbox}
-  //           key={label}
-  //       />
-  // )
-  //
-  // createCheckboxes = () => (
-  //   items.map(this.createCheckbox)
-  // )
 
 
   removeOpportunity(opportunityId){
@@ -111,10 +169,29 @@ class App extends Component {
       this.database.push(opportunity);
     }
 
+    handleUserInput(e){
+      /* Her kan du bare bruke e.target.value for å hente verdi */
+      /* Du kan også bruke e.target.name for å identifisere hvilken input det er.
+        Da må hver input lenger nede ha input-feltet definert */
+      const name = e.target.name;
+      const value = e.target.value;
 
+      /* ...this.state er en måte å kopiere alt på. Det betyr bare "hent alt i objektet"
+        F.eks. kan du si
+        const newState = {
+          ...this.state,
+          newopportunityTitle: 'Denne vil overskrive opprinnelig title som finnes i this.state'
+        }
+        */
+      const newState = {
+        ...this.state
+      }
+      newState[name] = value
 
+      console.log(newState, 'this is newstate')
 
-
+      this.setState(newState)
+    }
 
   render() {
     // console.log('opportunities', this.state.opportunities)
@@ -122,56 +199,48 @@ class App extends Component {
     <div className="opportunityWrapper">
       <div className="OpportunityBody">
         <div className="OpportunityHeader"> Input Opportunity </div>
-        <Form addOpportunity={this.addOpportunity}/>
+
+        <input className="titleInput"
+          placeholder="Type..."
+          name="type"
+          onChange={this.handleUserInput}         /* Lagt til */
+        />
+        <button className="noteButton"
+          onClick={this.handleUserInput}> Select Type </button>
+
+        {this.state.type === 'job' && <JobForm momdad = {this.momdad} handleUserInput = {this.handleUserInput}/>}
+        {this.state.type === 'event' && <EventForm addOpportunity = {this.addOpportunity} />}
+        {this.state.type === 'program' && <ProgramForm addOpportunity = {this.addOpportunity} />}
+
       </div>
       <div className="OpportunityBody">
         <div className="OpportunityHeader"> All Opportunities </div>
-        {
-          this.state.opportunities.map((opportunity, i) => {
+                {
+                  this.state.opportunities.map((opportunity, i) => {
 
-            /* Her er det noe i databasen som gjør at vi får dobbelt.
-              For nå, så henter vi bare det innerste objektet (opportunityTitle), siden det er
-              den som blir registrert riktig
-              EDIT: Se kommentar i componentWillMount() */
+                    /* Her er det noe i databasen som gjør at vi får dobbelt.
+                      For nå, så henter vi bare det innerste objektet (opportunityTitle), siden det er
+                      den som blir registrert riktig
+                      EDIT: Se kommentar i componentWillMount() */
 
-              // if (this.state.selectedType == "Job") {
-              //   return(
-              //     console.log("this is job"),
-              //     <Form className="formInput"
-              //       addOpportunity={this.addOpportunity} />
-              //   )
-              // } else if (this.state.selectedType == "Event") {
-              //   return(
-              //     <Form addOpportunity={this.addOpportunity} />
-              //   )
-              // } else if (this.state.selectedType == "Offer") {
-              //   return(
-              //     <Form addOpportunity={this.addOpportunity} />
-              //   )
-              // } else {
-              //   return(
-              //     <div> None selected </div>
-              //   )
-              // }
-
-            return (
-                <Opportunity
-                key={i} /* Når man bruker map og genererer elementer må man ha en key for hvert element */
-                Type={opportunity.Type}
-                Title={opportunity.Title}
-                Company={opportunity.Company}
-                Location={opportunity.Location}
-                Description={opportunity.Description}
-                Link={opportunity.Link}
-                opportunityId={opportunity.id}
-                key={opportunity.id}
-                removeOpportunity={this.removeOpportunity}
-              />
-            )
+                    return (
+                        <Opportunity
+                        key={i} /* Når man bruker map og genererer elementer må man ha en key for hvert element */
+                        opportunityTitle={opportunity.opportunityTitle}
+                        opportunityCompany={opportunity.opportunityCompany}
+                        opportunityLocation={opportunity.opportunityLocation}
+                        opportunityDescription={opportunity.opportunityDescription}
+                        opportunityLink={opportunity.opportunityLink}
+                        opportunityId={opportunity.id}
+                        key={opportunity.id}
+                        removeOpportunity={this.removeOpportunity}
+                      />
+                    )
           })
         }
           </div>
       </div>
+
     )
   }
 }
