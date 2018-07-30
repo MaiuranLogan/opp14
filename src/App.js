@@ -139,13 +139,13 @@ class App extends Component {
                     return (
                         <Opportunity
                         key={i} /* Når man bruker map og genererer elementer må man ha en key for hvert element */
-                        opportunityTitle={opportunity.opportunityTitle}
-                        opportunityCompany={opportunity.opportunityCompany}
-                        opportunityLocation={opportunity.opportunityLocation}
-                        opportunityDescription={opportunity.opportunityDescription}
-                        opportunityLink={opportunity.opportunityLink}
+                        Type={opportunity.Type}
+                        Title={opportunity.Title}
+                        Company={opportunity.Company}
+                        Location={opportunity.Location}
+                        Description={opportunity.Description}
+                        Link={opportunity.Link}
                         opportunityId={opportunity.id}
-                        key={opportunity.id}
                         removeOpportunity={this.removeOpportunity}
                       />
                     )
